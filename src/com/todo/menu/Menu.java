@@ -9,10 +9,14 @@ public class Menu {
         System.out.println("[add] 새로운 할 일 목록 추가");
         System.out.println("[del] 기존의 할 일 목록 삭제");
         System.out.println("[edit] 할 일 목록 수정");
+        System.out.println("[find] 키워드 검색하기");
+        System.out.println("[find_cate] 키워드 검색하기");
         System.out.println("[ls] 전체 할 일 목록 보기");
+        System.out.println("[ls_cate] 카테고리 목록 보기");
         System.out.println("[ls_name_asc] 제목 순서대로 정리하여 보기");
         System.out.println("[ls_name_desc] 제목 역순으로 정리하여 보기");
-        System.out.println("[ls_date] 날짜 순서대로 정리하여 보기");
+        System.out.println("[ls_date_asc] 날짜 순서대로 정리하여 보기");
+        System.out.println("[ls_date_desc] 날짜 역순으로 정리하여 보기");
         System.out.println("[exit] 끝내기");
         
     }

@@ -3,6 +3,7 @@ package com.todo.dao;
 import java.util.*;
 
 import com.todo.service.TodoSortByDate;
+import com.todo.service.TodoSortByDateReverse;
 import com.todo.service.TodoSortByName;
 
 public class TodoList {
@@ -14,10 +15,13 @@ public class TodoList {
 
 	public void addItem(TodoItem t) {
 		list.add(t);
+		
 	}
 
 	public void deleteItem(TodoItem t) {
 		list.remove(t);
+		t.last_num--;
+		
 	}
 
 	void editItem(TodoItem t, TodoItem updated) {
@@ -36,8 +40,8 @@ public class TodoList {
 	}
 
 	public void listAll() {
-		for (TodoItem myitem : list) {
-			System.out.println("["+myitem.getTitle() + "] " + myitem.getDesc() + " - " + myitem.getCurrent_date());
+		for (TodoItem item : list) {
+			System.out.println(item.getNum()+". [" + item.getCategory() + "] " + item.getTitle() + " - " + item.getDesc() + " - " + item.getDue_date() + " - " + item.getCurrent_date());
 		}
 	}
 	
@@ -45,12 +49,12 @@ public class TodoList {
 		Collections.reverse(list);
 	}
 
-	public void sortByDate() {
+	public void sortByDateasc() {
 		Collections.sort(list, new TodoSortByDate());
 	}
-
-	public int indexOf(TodoItem t) {
-		return list.indexOf(t);
+	
+	public void sortByDatedesc() {
+		Collections.sort(list, new TodoSortByDateReverse());
 	}
 
 	public Boolean isDuplicate(String title) {
@@ -59,4 +63,5 @@ public class TodoList {
 		}
 		return false;
 	}
+
 }
