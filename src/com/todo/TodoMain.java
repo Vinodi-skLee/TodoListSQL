@@ -1,7 +1,5 @@
 package com.todo;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Scanner;
 
 import com.todo.dao.TodoList;
@@ -11,29 +9,14 @@ import com.todo.service.TodoUtil;
 public class TodoMain {
 	
 	public static void start() {
-		
 		Scanner sc = new Scanner(System.in);
 		TodoList l = new TodoList();
-		boolean isList = false;
+		l.importData("todolist.txt");
 		boolean quit = false;
-		
-		File f = new File("todolist.txt");
-		if(f.isFile() != true) {
-			System.out.println("todolist.txt 파일이 없습니다.");
-		} else {
-			try {
-				TodoUtil.loadList(l,"todolist.txt");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println("todolist.txt 파일 로딩 완료");
-		}
 		
 		Menu.displaymenu();
 		do {
 			Menu.prompt();
-			isList = false;
 			String choice = sc.next();
 			switch (choice) {
 
@@ -48,17 +31,27 @@ public class TodoMain {
 			case "edit":
 				TodoUtil.updateItem(l);
 				break;
+			
+			case "comp":
+				TodoUtil.completeItem(l);
+				break;
+				
+			case "ls_comp":
+				TodoUtil.listCompleted(l);
+				break;
 				
 			case "ls":
 				TodoUtil.listAll(l);
 				break;
 				
 			case "find":
-				TodoUtil.findItem(l);
+				String keyword = sc.nextLine().trim();
+				TodoUtil.findItem(l, keyword);
 				break;
 			
 			case "find_cate":
-				TodoUtil.findcateItem(l);
+				String cate = sc.nextLine().trim();
+				TodoUtil.findcateItem(l, cate);
 				break;
 				
 			case "ls_cate":
@@ -66,28 +59,23 @@ public class TodoMain {
 				break;	
 				
 			case "ls_name_asc":
-				l.sortByName();
 				System.out.println("제목 순서대로 정렬 되었습니다!");
-				isList = true;
+				TodoUtil.listAll(l, "title", 1);
 				break;
 
 			case "ls_name_desc":
-				l.sortByName();
-				l.reverseList();
 				System.out.println("제목 역순으로 정렬 되었습니다!");
-				isList = true;
+				TodoUtil.listAll(l, "title", 0);
 				break;
 				
 			case "ls_date_asc":
-				l.sortByDateasc();
 				System.out.println("날짜 순서대로 정렬 되었습니다!");
-				isList = true;
+				TodoUtil.listAll(l, "due_date", 1);
 				break;
 				
 			case "ls_date_desc":
-				l.sortByDatedesc();
 				System.out.println("날짜 역순으로 정렬 되었습니다!");
-				isList = true;
+				TodoUtil.listAll(l, "due_date", 0);
 				break;
 
 			case "exit":
@@ -103,8 +91,6 @@ public class TodoMain {
 				System.out.println("정확한 명력어를 입력하세요! [도움말 - help]");
 				break;
 			}
-			
-			if(isList) l.listAll();
 		} while (!quit);
 	}
 }
