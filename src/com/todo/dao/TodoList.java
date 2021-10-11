@@ -125,9 +125,11 @@ public class TodoList {
 				String description = rs.getString("memo");
 				String due_date = rs.getString("due_date");
 				String current_date = rs.getString("current_date");
+				int  is_completed = rs.getInt("is_completed");
 				TodoItem t = new TodoItem(title, description, category, due_date);
 				t.setNum(id);
 				t.setCurrent_date(current_date);
+				t.setIs_completed(is_completed);
 				list.add(t);
 			}
 			stmt.close();
@@ -155,9 +157,11 @@ public class TodoList {
 				String description = rs.getString("memo");
 				String due_date = rs.getString("due_date");
 				String current_date = rs.getString("current_date");
+				int  is_completed = rs.getInt("is_completed");
 				TodoItem t = new TodoItem(title, description, category, due_date);
 				t.setNum(id);
 				t.setCurrent_date(current_date);
+				t.setIs_completed(is_completed);
 				list.add(t);
 			}
 			pstmt.close();
@@ -280,9 +284,7 @@ public class TodoList {
 			pstmt.setInt(1, target);
 			count = pstmt.executeUpdate();
 			pstmt.close();
-			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return count;

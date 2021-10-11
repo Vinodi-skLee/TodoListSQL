@@ -183,8 +183,6 @@ public class TodoUtil {
 			if(item.getIs_completed()==1) {
 				System.out.println(item.toString());
 				count++;
-			} else {
-				
 			}
 		}
 		System.out.printf("\n총 %d개의 항목이 완료되었습니다.", count);

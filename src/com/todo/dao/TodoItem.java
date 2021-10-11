@@ -9,7 +9,7 @@ public class TodoItem {
     private String desc;
     private String due_date;
     private String current_date;
-    private int is_completed;
+    public int is_completed;
 	static int last_num = 0;
     public int num;
     
@@ -21,7 +21,6 @@ public class TodoItem {
         this.due_date = due_date;
         SimpleDateFormat transFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         this.current_date = transFormat.format(new Date());
- 
         last_num++;
         num = last_num;
         
@@ -33,10 +32,13 @@ public class TodoItem {
         this.desc = desc;
         this.due_date = due_date;
         this.current_date = current_date;
+        
         last_num++;
         num = last_num;
         
     }
+    
+    
     
     public int getNum() {
     	return num;
@@ -99,11 +101,9 @@ public class TodoItem {
 	}
     
     public String toString() {
-    	if(getIs_completed() == 1) {
-    		return num + ". [" + category + "] " + title + "[V] - " + desc + " - " + due_date + " - " + current_date;
-    	} else {
+    	if(is_completed == 0) {
     		return num + ". [" + category + "] " + title + " - " + desc + " - " + due_date + " - " + current_date;
-    	}
+    	} return num + ". [" + category + "] " + title + "[V] - " + desc + " - " + due_date + " - " + current_date;
     }
     
     public String toSaveString() {
