@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TodoItem {
+	private String priority;
+	private String level;
     private String title;
     private String category;
     private String desc;
@@ -13,9 +15,10 @@ public class TodoItem {
 	static int last_num = 0;
     public int num;
     
-    
-    public TodoItem(String title, String desc, String category, String due_date){
-        this.title = title;
+    public TodoItem(String priority, String level, String title, String desc, String category, String due_date){
+        this.priority = priority;
+        this.level = level;
+    	this.title = title;
         this.category = category;
         this.desc = desc;
         this.due_date = due_date;
@@ -23,22 +26,23 @@ public class TodoItem {
         this.current_date = transFormat.format(new Date());
         last_num++;
         num = last_num;
-        
     }
     
-    public TodoItem(String title, String desc, String category, String due_date, String current_date){
-        this.title = title;
+    public TodoItem(String priority, String level, String title, String desc, String category, String due_date, String current_date){
+    	this.priority = priority;
+    	this.level = level;
+    	this.title = title;
         this.category = category;
         this.desc = desc;
         this.due_date = due_date;
         this.current_date = current_date;
-        
         last_num++;
         num = last_num;
-        
     }
     
-    
+    public TodoItem(String priority){
+    	this.priority = priority;
+    }
     
     public int getNum() {
     	return num;
@@ -51,7 +55,23 @@ public class TodoItem {
     public int getLastNum() {
     	return last_num;
     }
-    public String getTitle() {
+    public String getPriority() {
+		return priority;
+	}
+
+	public void setPriority(String priority) {
+		this.priority = priority;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public String getTitle() {
         return title;
     }
 
@@ -102,11 +122,11 @@ public class TodoItem {
     
     public String toString() {
     	if(is_completed == 0) {
-    		return num + ". [" + category + "] " + title + " - " + desc + " - " + due_date + " - " + current_date;
-    	} return num + ". [" + category + "] " + title + "[V] - " + desc + " - " + due_date + " - " + current_date;
+    		return num + ". ["+ category +" / " + priority + " / " + level + "] " + title + " - " + desc + " - " + due_date + " - " + current_date;
+    	} return num + ". ["+ category + " / " + priority + " / ✔] " + title + " - " + desc + " - " + due_date + " - " + current_date;
     }
     
     public String toSaveString() {
-    	return num + "##" + title + "##" + category + "##" + desc + "##" + due_date + "##" + current_date + "\n";
+    	return priority + "##" + level + "##" + title + "##" + category + "##" + desc + "##" + due_date + "##" + current_date +"##" + is_completed + "\n";
     }
 }

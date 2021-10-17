@@ -11,7 +11,7 @@ public class TodoMain {
 	public static void start() {
 		Scanner sc = new Scanner(System.in);
 		TodoList l = new TodoList();
-		l.importData("todolist.txt");
+		l.importData("todolist.txt",l);
 		boolean quit = false;
 		
 		Menu.displaymenu();
@@ -31,17 +31,9 @@ public class TodoMain {
 			case "edit":
 				TodoUtil.updateItem(l);
 				break;
-			
-			case "comp":
-				TodoUtil.completeItem(l);
-				break;
 				
-			case "ls_comp":
-				TodoUtil.listCompleted(l);
-				break;
-				
-			case "ls":
-				TodoUtil.listAll(l);
+			case "edit_pr":
+				TodoUtil.updatePriority(l);
 				break;
 				
 			case "find":
@@ -53,12 +45,32 @@ public class TodoMain {
 				String cate = sc.nextLine().trim();
 				TodoUtil.findcateItem(l, cate);
 				break;
+			
+			case "ls":
+				TodoUtil.listAll(l);
+				break;
 				
 			case "ls_cate":
 				TodoUtil.listCate(l);
-				break;	
+				break;
+			
+			case "comp":
+				TodoUtil.completeItem(l);
+				break;
 				
-			case "ls_name_asc":
+			case "ls_comp":
+				TodoUtil.listCompleted(l);
+				break;
+			
+			case "ls_notcomp":
+				TodoUtil.listNotComplete(l);
+				break;
+				
+			case "del_comp":
+				TodoUtil.deleteCompletedItem(l);
+				break;
+				
+			case "ls_name":
 				System.out.println("제목 순서대로 정렬 되었습니다!");
 				TodoUtil.listAll(l, "title", 1);
 				break;
@@ -68,7 +80,7 @@ public class TodoMain {
 				TodoUtil.listAll(l, "title", 0);
 				break;
 				
-			case "ls_date_asc":
+			case "ls_date":
 				System.out.println("날짜 순서대로 정렬 되었습니다!");
 				TodoUtil.listAll(l, "due_date", 1);
 				break;
@@ -76,6 +88,16 @@ public class TodoMain {
 			case "ls_date_desc":
 				System.out.println("날짜 역순으로 정렬 되었습니다!");
 				TodoUtil.listAll(l, "due_date", 0);
+				break;
+				
+			case "ls_pr":
+				System.out.println("우선순위 순서대로 정렬 되었습니다!");
+				TodoUtil.listAll(l, "priority", 1);
+				break;
+				
+			case "ls_pr_desc":
+				System.out.println("우선순위 역순으로 정렬 되었습니다!");
+				TodoUtil.listAll(l, "priority", 0);
 				break;
 
 			case "exit":
